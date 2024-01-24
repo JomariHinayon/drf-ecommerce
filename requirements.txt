@@ -3,6 +3,7 @@ attrs==23.2.0
 black==23.9.1
 click==8.1.7
 colorama==0.4.6
+coverage==7.4.0
 Django==4.2.4
 django-js-asset==2.1.0
 django-mptt==0.15.0
