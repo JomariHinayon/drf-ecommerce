@@ -25,7 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # internal apps
-    'product',
+    'ecommerce.product',
 
     #external apps
     'rest_framework',

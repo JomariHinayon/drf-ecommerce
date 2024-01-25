@@ -3,7 +3,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
-from product import views
+from ecommerce.product import views
 
 router = DefaultRouter()
 router.register(r'category', views.CategoryViewSet)
