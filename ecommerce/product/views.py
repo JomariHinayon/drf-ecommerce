@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from drf_spectacular.utils import extend_schema
 from rest_framework.decorators import action
 
-from .serializers import CategorySerializer, BrandSerializer, ProductSerializer
+from .serializers import CategorySerializer, BrandSerializer, ProductSerializer, ProductLineSerializer
 from .models import Category, Brand, Product
 
 class CategoryViewSet(viewsets.ViewSet):
@@ -27,7 +27,8 @@ class ProductViewSet(viewsets.ViewSet):
 
     queryset = Product.objects.all()
     lookup_field = "slug"
-    
+    serializer_class = ProductSerializer
+
     def retrieve(self, request, slug=None):
         serializer = ProductSerializer(self.queryset.filter(slug=slug), many=True)
         return Response(serializer.data)
@@ -42,7 +43,7 @@ class ProductViewSet(viewsets.ViewSet):
     """
     @action(methods=["get"], detail=False, url_path=r"category/(?P<category>\w+)/all")
     def list_product_by_category(self, request, category=None):
-        serializer = ProductSerializer(self.queryset.filter(category__name=category), many=True)
+        serializer = ProductSerializer(self.queryset.filter(category__name__iexact=category), many=True)
         return Response(serializer.data)
 
 
