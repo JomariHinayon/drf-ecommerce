@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.response import Response
-from drf_spectacular.utils import extend_schema
 from rest_framework.decorators import action
+from drf_spectacular.utils import extend_schema
 
 from .serializers import CategorySerializer, BrandSerializer, ProductSerializer, ProductLineSerializer
 from .models import Category, Brand, Product
@@ -12,7 +12,7 @@ class CategoryViewSet(viewsets.ViewSet):
     A simple Viewset for viewing all categories
     """
 
-    queryset = Category.objects.all()
+    queryset = Category.objects.all().isactive()
 
     @extend_schema(responses=CategorySerializer)
     def list(self, request):
@@ -25,7 +25,7 @@ class ProductViewSet(viewsets.ViewSet):
         A simple Viewset for viewing all products
     """
 
-    queryset = Product.objects.all()
+    queryset = Product.objects.all().isactive()
     lookup_field = "slug"
     serializer_class = ProductSerializer
 
@@ -52,7 +52,7 @@ class BrandViewSet(viewsets.ViewSet):
     A simple Viewset for viewing all brands
     """
 
-    queryset = Brand.objects.all()
+    queryset = Brand.objects.all().isactive()
 
     @extend_schema(responses=BrandSerializer)
     def list(self, request):
